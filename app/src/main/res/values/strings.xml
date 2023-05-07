@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">FileExplorer</string>
+    <string name="name_example">Name</string>
+    <string name="file_size_example">0 byte</string>
+    <string name="file_date_example">01.01.2012</string>
+    <string name="no_files_text">No files in directory</string>
+    <string name="get_permission">Get permission</string>
+    <string name="open_storage">Open storage</string>
+    <string name="permission_explanation">In order to display files this app requires access to external storage</string>
+    <string name="home_button">Home button</string>
+    <string name="sort">Sort</string>
+    <string name="filter">Filter</string>
+    <string name="current_directory">Current directory</string>
+</resources>
