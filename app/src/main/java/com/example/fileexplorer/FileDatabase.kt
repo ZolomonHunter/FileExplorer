@@ -12,6 +12,7 @@ import androidx.room.RoomDatabase
 abstract class FileDatabase: RoomDatabase() {
     abstract val dao: FileDao
 
+    // Singleton pattern (from android developers docs)
     companion object {
         // Singleton prevents multiple instances of database opening at the
         // same time.

@@ -1,13 +1,9 @@
 package com.example.fileexplorer
 
-import android.R
 import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.Context
 import android.os.Environment
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
@@ -15,7 +11,7 @@ import java.io.File
 import java.math.BigInteger
 import java.security.MessageDigest
 
-
+// CoroutineWorker for updating hash in Room
 class CoroutineUpdateHashWorker(
     context: Context,
     params: WorkerParameters
@@ -34,6 +30,9 @@ class CoroutineUpdateHashWorker(
         val initialFiles =
             Environment.getExternalStorageDirectory().listFiles() ?: return Result.failure()
 
+        // Scanning file storage BFS
+        // Ignoring files in hidden directories, directories paths and hidden files
+        // On app startup newHash becomes oldHash and newHash recalculated
         val queue = ArrayDeque<File>()
         for (file in initialFiles)
             queue.addFirst(file)
@@ -54,14 +53,14 @@ class CoroutineUpdateHashWorker(
         return Result.success()
     }
 
-
+    // Overriding for setExpedited request
     override suspend fun getForegroundInfo(): ForegroundInfo {
         val notificationBuilder = NotificationCompat.Builder(applicationContext, "M_CH_ID")
 
         notificationBuilder.setAutoCancel(true)
             .setDefaults(Notification.DEFAULT_ALL)
             .setWhen(System.currentTimeMillis())
-            .setSmallIcon(R.drawable.ic_menu_save)
+            .setSmallIcon(android.R.drawable.ic_menu_save)
             .setContentTitle("Hash updating")
             .setContentText("Updating hash in foreground")
             .setContentInfo("Info")

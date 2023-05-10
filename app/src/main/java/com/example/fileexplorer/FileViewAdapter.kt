@@ -9,15 +9,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.content.FileProvider
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView.*
 import java.io.File
-import java.nio.file.Files
 import java.nio.file.attribute.BasicFileAttributes
-import java.nio.file.attribute.FileTime
 import kotlin.io.path.readAttributes
 
 class FileViewAdapter(private val fileArray : Array<File>) : Adapter<FileViewAdapter.FileViewHolder>() {
@@ -52,6 +48,7 @@ class FileViewAdapter(private val fileArray : Array<File>) : Adapter<FileViewAda
     }
 }
 
+// Open file or directory on click
 private fun onClickListenerFun(context: Context, holder: FileViewAdapter.FileViewHolder, curFile: File) {
     if (curFile.isDirectory) {
         val intent = Intent(holder.itemView.context, MainActivity::class.java)
@@ -82,6 +79,7 @@ private fun onClickListenerFun(context: Context, holder: FileViewAdapter.FileVie
     }
 }
 
+// Share file on long click
 private fun onLongClickListenerFun(context: Context, curFile: File): Boolean {
     return if (curFile.isFile) {
         val intent = Intent(Intent.ACTION_SEND)

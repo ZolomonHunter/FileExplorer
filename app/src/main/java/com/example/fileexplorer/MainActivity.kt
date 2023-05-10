@@ -55,6 +55,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Getting recently updated files (oldHash != newHash)
+    // If Worker is still running result may be wrong
     private fun filterSpinnerListenerOnSelect(
         position: Int,
         files: Array<File>,
@@ -119,6 +121,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Getting current directory (Default is storage/emulated/0)
     private fun getDir() : File {
         val path: File = if (intent.getStringExtra("path") != null) {
             File(intent.getStringExtra("path")!!)
@@ -131,6 +134,7 @@ class MainActivity : AppCompatActivity() {
         return path
     }
 
+    // Returning to home directory (storage/emulated/0)
     private fun openExplorer() {
         val intent = Intent(applicationContext, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
